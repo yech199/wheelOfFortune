@@ -1,0 +1,28 @@
+<resources>
+    <!-- Top bar -->
+    <string name="back_button">Back</string>
+
+    <string name="main_menu">Main Menu</string>
+    <string name="categories">Word Categories</string>
+    <string name="app_name">The Wheel of Fortune</string>
+    <string name="game_ended">Game Ended</string>
+
+
+    <!-- Main Menu Screen-->
+    <string name="play">Play The Fortune of The Wheel</string>
+    <string name="highscores">High Scores</string>
+    <string name="settings">Settings</string>
+    <string name="Help">Help</string>
+
+
+    <!-- Word Categories Screen -->
+    <string name="countries">Country Names</string>
+    <string name="food">Food</string>
+    <string name="movie_titles">Movie Titles</string>
+    <string name="animals">Animals</string>
+    <string name="adjectives">Adjectives</string>
+
+    <!-- Game Screen -->
+
+    <!-- Gamed Ended Screen -->
+</resources>
