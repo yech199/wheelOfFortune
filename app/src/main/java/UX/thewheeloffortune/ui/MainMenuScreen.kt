@@ -18,8 +18,11 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun MainMenuScreen(
-    onButtonClicked: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onPlayClicked: () -> Unit,
+    onHighScoresClicked: () -> Unit,
+    onSettingsClicked: () -> Unit,
+    onHelpClicked: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -36,7 +39,7 @@ fun MainMenuScreen(
         Spacer(modifier = Modifier.height(50.dp))
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onPlayClicked,
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
         ) {
             Text(
@@ -47,17 +50,17 @@ fun MainMenuScreen(
 
         Spacer(modifier = Modifier.height(50.dp))
         OutlinedButton(
-            onClick = { /*TODO*/ }
+            onClick = onHighScoresClicked
         ) {
             Text(
-                text = stringResource(id = R.string.highscores),
+                text = stringResource(id = R.string.high_scores),
                 fontSize = 22.sp
             )
         }
 
         Spacer(modifier = Modifier.height(50.dp))
         OutlinedButton(
-            onClick = { /*TODO*/ }
+            onClick = onSettingsClicked
         ) {
             Text(
                 text = stringResource(id = R.string.settings),
@@ -67,7 +70,7 @@ fun MainMenuScreen(
 
         Spacer(modifier = Modifier.height(50.dp))
         OutlinedButton(
-            onClick = { /*TODO*/ }
+            onClick = onHelpClicked
         ) {
             Text(
                 text = stringResource(id = R.string.help),
@@ -81,6 +84,9 @@ fun MainMenuScreen(
 @Composable
 fun MainMenuScreenPreview() {
     MainMenuScreen(
-        onButtonClicked = {}
+        onPlayClicked = { },
+        onHighScoresClicked = { },
+        onSettingsClicked = { },
+        onHelpClicked = { }
     )
 }
