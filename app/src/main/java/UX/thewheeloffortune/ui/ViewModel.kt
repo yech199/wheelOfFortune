@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 /**
  * Holds the logic and calculations of the app
@@ -34,7 +35,22 @@ class ViewModel : ViewModel() {
         usedLetters.clear()
         _uiState.value = UiState(currentWordToGuess = getRandomWord("countries")) // hardcoded
     }
+    //---------------------------------------------------------------------
+    // SETTERS
+    //---------------------------------------------------------------------
+    fun setCategory(category: String) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                category = category
+            )
+        }
+    }
 
+
+
+    //---------------------------------------------------------------------
+    // CALCULATE AND GET
+    //---------------------------------------------------------------------
     private fun getRandomWord(category: String): String {
         when(category) { // hardcoded
             "countries" -> wordToGuess = countries.random()
