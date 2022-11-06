@@ -19,7 +19,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import java.util.Locale.Category
+import UX.thewheeloffortune.data.Options.categories
+import androidx.compose.ui.platform.LocalContext
 
 /**
  * stringRessource can only be used in composables. Therefore the title is not a string
@@ -27,6 +28,9 @@ import java.util.Locale.Category
 enum class Screen(@StringRes val title: Int) {
     MainMenu(title = R.string.main_menu),
     Category(title = R.string.categories),
+    HighScores(title = R.string.high_scores),
+    Settings(title = R.string.settings),
+    Help(title = R.string.help),
     Game(title = R.string.app_name),
     GameEnd(title = R.string.game_ended)
 }
@@ -61,23 +65,44 @@ fun MainScreen(
         ) {
             composable(route = Screen.MainMenu.name) {
                 MainMenuScreen(
-                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+                    onPlayClicked = { navController.navigate(Screen.Category.name) },
+                    onHighScoresClicked = { navController.navigate(Screen.HighScores.name) },
+                    onSettingsClicked = { navController.navigate(Screen.Settings.name) },
+                    onHelpClicked = { navController.navigate(Screen.Help.name)}
                 )
             }
             composable(route = Screen.Category.name) {
+                val context = LocalContext.current
                 CategoryScreen(
-                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+                    categories = categories.map { id -> context.resources.getString(id) },
+                    onButtonClicked = { navController.navigate(Screen.Game.name) },
+                    onChangeSelection = { viewModel.setCategory(it) }
                 )
+            }
+            composable(route = Screen.HighScores.name) {
+//                HighScoreScreen(
+//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+//                )
+            }
+            composable(route = Screen.Settings.name) {
+//                SettingsScreen(
+//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+//                )
+            }
+            composable(route = Screen.Help.name) {
+//                HelpScreen(
+//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+//                )
             }
             composable(route = Screen.Game.name) {
-                GameScreen(
-                    onButtonClicked = { navController.navigate(Screen.Game.name) }
-                )
+//                GameScreen(
+//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+//                )
             }
             composable(route = Screen.GameEnd.name) {
-                GameEndScreen(
-                    onButtonClicked = { navController.navigate(Screen.Game.name) }
-                )
+//                GameEndScreen(
+//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+//                )
             }
         }
     }
