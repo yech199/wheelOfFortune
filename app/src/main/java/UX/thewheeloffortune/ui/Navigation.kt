@@ -3,7 +3,6 @@ package UX.thewheeloffortune.ui
 import UX.thewheeloffortune.R
 import UX.thewheeloffortune.ui.theme.TheWheelOfFortuneTheme
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,12 +19,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import java.util.Locale.Category
 
 /**
  * stringRessource can only be used in composables. Therefore the title is not a string
  */
 enum class Screen(@StringRes val title: Int) {
-    MainMemory(title = R.string.main_menu),
+    MainMenu(title = R.string.main_menu),
     Category(title = R.string.categories),
     Game(title = R.string.app_name),
     GameEnd(title = R.string.game_ended)
@@ -41,7 +41,7 @@ fun MainScreen(
     val backStackEntry by navController.currentBackStackEntryAsState()
     // The name of the current screen
     val currentScreen = Screen.valueOf(
-        backStackEntry ?.destination ?.route ?: Screen.MainMemory.name
+        backStackEntry ?.destination ?.route ?: Screen.MainMenu.name
     )
 
     Scaffold(
@@ -56,21 +56,30 @@ fun MainScreen(
 
         NavHost(
             navController = navController,
-            startDestination = Screen.MainMemory.name,
+            startDestination = Screen.MainMenu.name,
             modifier = modifier.padding(innerPadding)
         ) {
-            composable(route = Screen.MainMemory.name) {
-                MainMenuScreen(onButtonClicked = {})
+            composable(route = Screen.MainMenu.name) {
+                MainMenuScreen(
+                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+                )
+            }
+            composable(route = Screen.Category.name) {
+                CategoryScreen(
+                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+                )
+            }
+            composable(route = Screen.Game.name) {
+                GameScreen(
+                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+                )
+            }
+            composable(route = Screen.GameEnd.name) {
+                GameEndScreen(
+                    onButtonClicked = { navController.navigate(Screen.Game.name) }
+                )
             }
         }
-    }
-
-
-
-    Column(
-        modifier = modifier
-    ) {
-
     }
 }
 
