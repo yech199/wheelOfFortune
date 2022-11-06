@@ -60,7 +60,7 @@ fun MainScreen(
             modifier = modifier.padding(innerPadding)
         ) {
             composable(route = Screen.MainMemory.name) {
-
+                MainMenuScreen(onButtonClicked = {})
             }
         }
     }
