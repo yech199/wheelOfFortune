@@ -3,6 +3,7 @@ package UX.thewheeloffortune.ui
 import UX.thewheeloffortune.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.RadioButton
@@ -53,7 +54,11 @@ fun CategoryScreen(
             }
         }
 
-        Button(onClick = onButtonClicked) {
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            enabled = selectedCategory.isNotEmpty(),
+            onClick = onButtonClicked
+        ) {
             Text(text = stringResource(id = R.string.play_category))
         }
     }
