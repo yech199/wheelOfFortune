@@ -10,9 +10,12 @@
     <string name="game_ended">Game Ended</string>
 
 
-    <!-- Main Menu Screen-->
+    <!-- Main Menu Screen -->
     <string name="play">Play The Fortune of The Wheel</string>
     <string name="help">Help</string>
+
+    <!-- Settings Screen -->
+    <string name="dark_mode">Dark Mode</string>
 
 
     <!-- Word Categories Screen -->

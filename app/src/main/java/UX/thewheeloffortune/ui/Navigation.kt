@@ -85,9 +85,11 @@ fun MainScreen(
 //                )
             }
             composable(route = Screen.Settings.name) {
-//                SettingsScreen(
-//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
-//                )
+                SettingsScreen(
+                    // TODO: Make toggle work!
+                    isDarkMode = false,
+                    onDarkModeChanged = {}
+                )
             }
             composable(route = Screen.Help.name) {
 //                HelpScreen(
@@ -108,6 +110,9 @@ fun MainScreen(
     }
 }
 
+/**
+ * The top bar showing which screen the current screen is
+ */
 @Composable
 fun TopBar(
     currentScreen: Screen,

@@ -5,6 +5,8 @@ package UX.thewheeloffortune.data
  */
 data class UiState(
     val category: String = "",
+    val isDarkMode: Boolean = false,
+
     val currentWordToGuess: String = "",
     val NoLives: Int = 5,
     val score: Int = 0,
