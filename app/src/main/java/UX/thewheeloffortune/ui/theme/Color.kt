@@ -2,7 +2,9 @@ package UX.thewheeloffortune.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Button color
 val md_theme_light_primary = Color(0xFFD0BCFF)
+val purple = Color(129, 91, 161)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFEADDFF)
 val md_theme_light_onPrimaryContainer = Color(0xFF21005D)

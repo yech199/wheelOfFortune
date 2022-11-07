@@ -32,7 +32,6 @@ enum class Screen(@StringRes val title: Int) {
     Settings(title = R.string.settings),
     Help(title = R.string.help),
     Game(title = R.string.app_name),
-    GameEnd(title = R.string.game_ended)
 }
 
 @Composable
@@ -95,14 +94,10 @@ fun MainScreen(
                 HelpScreen()
             }
             composable(route = Screen.Game.name) {
-//                GameScreen(
-//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
-//                )
-            }
-            composable(route = Screen.GameEnd.name) {
-//                GameEndScreen(
-//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
-//                )
+                GameScreen(
+                    NoLives = uiState.NoLives,
+                    score = uiState.score
+                )
             }
         }
     }
