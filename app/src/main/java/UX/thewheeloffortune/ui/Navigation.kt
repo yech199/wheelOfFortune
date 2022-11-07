@@ -92,9 +92,7 @@ fun MainScreen(
                 )
             }
             composable(route = Screen.Help.name) {
-//                HelpScreen(
-//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
-//                )
+                HelpScreen()
             }
             composable(route = Screen.Game.name) {
 //                GameScreen(

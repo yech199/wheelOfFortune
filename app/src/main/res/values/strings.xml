@@ -17,6 +17,9 @@
     <!-- Settings Screen -->
     <string name="dark_mode">Dark Mode</string>
 
+    <!-- Help Screen -->
+    <string name="rules">Rules</string>
+
 
     <!-- Word Categories Screen -->
     <string name="countries">Country Names</string>
