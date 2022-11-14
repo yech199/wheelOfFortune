@@ -1,7 +1,7 @@
 package UX.thewheeloffortune.ui
 
 import UX.thewheeloffortune.data.UiState
-import UX.thewheeloffortune.data.countries
+import UX.thewheeloffortune.data.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,42 +26,44 @@ class ViewModel : ViewModel() {
     private lateinit var wordToGuess: String
 
 
-
     init {
         resetGame()
     }
 
     fun resetGame() {
         usedLetters.clear()
-        _uiState.value = UiState(currentWordToGuess = getRandomWord("countries")) // hardcoded
+        _uiState.value = UiState()
     }
+
     //---------------------------------------------------------------------
     // SETTERS
     //---------------------------------------------------------------------
     fun setCategory(category: String) {
         _uiState.update { currentState ->
             currentState.copy(
-                category = category
+                category = Categories.valueOf(category)
             )
         }
     }
 
 
-
     //---------------------------------------------------------------------
     // CALCULATE AND GET
     //---------------------------------------------------------------------
-    private fun getRandomWord(category: String): String {
-        when(category) { // hardcoded
-            "countries" -> wordToGuess = countries.random()
+    private fun getRandomWord(category: Categories): String {
+        when (category) { // hardcoded
+            Categories.COUNTRY -> countries.random()
+            Categories.MOVIE_TITLE -> movies.random()
+            Categories.FOOD -> food.random()
+            Categories.ANIMAL -> animals.random()
+            Categories.ADJECTIVES -> adjectives.random()
         }
 
         if (usedWords.contains(wordToGuess)) {
-            return getRandomWord("countries") // hardcoded
+            return getRandomWord(category)
         }
-        else {
-            usedWords.add(wordToGuess)
-            return wordToGuess
-        }
+
+        usedWords.add(wordToGuess)
+        return wordToGuess.uppercase()
     }
 }

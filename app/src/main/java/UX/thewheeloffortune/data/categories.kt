@@ -1,5 +1,7 @@
 package UX.thewheeloffortune.data
 
+
+
 val countries: Set<String> = setOf(
     "Afghanistan",
     "Albania",
@@ -45,3 +47,27 @@ val countries: Set<String> = setOf(
     "Ecuador",
 
     )
+
+val food: Set<String> = setOf(
+    "Pasta",
+    "Cucumber",
+    "Salad"
+)
+
+val movies: Set<String> = setOf(
+    "Twilight",
+    "Divergent",
+    "Titanic"
+)
+
+val animals: Set<String> = setOf(
+    "Cat",
+    "Dog",
+    "Horse"
+)
+
+val adjectives: Set<String> = setOf(
+    "red",
+    "sweet",
+    "sad"
+)
