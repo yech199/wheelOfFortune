@@ -4,7 +4,6 @@ package UX.thewheeloffortune.data
  * All states of the UI.
  */
 data class UiState(
-//    val category: Categories = Categories.UNDEFINED,
     val category: String = "",
 //    val isDarkMode: Boolean = false,
     val NoLives: Int = 5,
