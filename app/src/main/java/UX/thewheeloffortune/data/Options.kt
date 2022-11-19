@@ -3,7 +3,6 @@ package UX.thewheeloffortune.data
 import UX.thewheeloffortune.R
 import androidx.annotation.StringRes
 
-
 enum class Categories(@StringRes val categoryName: Int) {
     UNDEFINED(-1),
     COUNTRY(R.string.countries),

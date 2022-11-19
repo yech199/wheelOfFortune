@@ -1,7 +1,5 @@
 package UX.thewheeloffortune.data
 
-
-
 val countries: Set<String> = setOf(
     "Afghanistan",
     "Albania",
