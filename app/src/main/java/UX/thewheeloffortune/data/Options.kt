@@ -10,7 +10,12 @@ enum class Categories(@StringRes val categoryName: Int) {
     MOVIE_TITLE(R.string.movie_titles),
     FOOD(R.string.food),
     ANIMAL(R.string.animals),
-    ADJECTIVES(R.string.adjectives)
+    ADJECTIVES(R.string.adjectives);
+
+    companion object {
+        fun getCategoryEnum(categoryName: Int):
+                Categories? = values().find { it.categoryName == categoryName}
+    }
 }
 
 object Options {

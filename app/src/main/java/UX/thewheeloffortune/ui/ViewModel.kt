@@ -32,7 +32,7 @@ class ViewModel : ViewModel() {
 
     fun resetGame() {
         usedLetters.clear()
-        _uiState.value = UiState()
+        _uiState.value = UiState(category = "")
     }
 
     //---------------------------------------------------------------------
@@ -41,7 +41,7 @@ class ViewModel : ViewModel() {
     fun setCategory(category: String) {
         _uiState.update { currentState ->
             currentState.copy(
-                category = Categories.valueOf(category)
+                category = category,
             )
         }
     }
@@ -57,6 +57,7 @@ class ViewModel : ViewModel() {
             Categories.FOOD -> food.random()
             Categories.ANIMAL -> animals.random()
             Categories.ADJECTIVES -> adjectives.random()
+            Categories.UNDEFINED -> getRandomWord(Categories.COUNTRY)
         }
 
         if (usedWords.contains(wordToGuess)) {
