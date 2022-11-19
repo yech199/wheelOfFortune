@@ -1,6 +1,7 @@
 package UX.thewheeloffortune.ui
 
 import UX.thewheeloffortune.R
+import UX.thewheeloffortune.data.Categories
 import UX.thewheeloffortune.data.Options.alphabet
 import UX.thewheeloffortune.ui.theme.TheWheelOfFortuneTheme
 import androidx.annotation.StringRes
@@ -74,9 +75,9 @@ fun MainScreen(
             composable(route = Screen.Category.name) {
                 val context = LocalContext.current
                 CategoryScreen(
-                    categories = categories.map { id -> context.resources.getString(id) },
+                    categories = categories,
                     onButtonClicked = { navController.navigate(Screen.Game.name) },
-                    onChangeSelection = { viewModel.setCategory(it) }
+                    onChangeSelection = { viewModel.setCategory(Categories.getCategoryEnum(it)) }
                 )
             }
             composable(route = Screen.HighScores.name) {

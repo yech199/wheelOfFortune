@@ -32,18 +32,20 @@ class ViewModel : ViewModel() {
 
     fun resetGame() {
         usedLetters.clear()
-        _uiState.value = UiState(category = "")
+        _uiState.value = UiState(category = Categories.UNDEFINED)
     }
 
     //---------------------------------------------------------------------
     // SETTERS
     //---------------------------------------------------------------------
-    fun setCategory(category: String) {
+    fun setCategory(category: Categories) {
         _uiState.update { currentState ->
             currentState.copy(
                 category = category,
+                currentWordToGuess = getRandomWord(category)
             )
         }
+
     }
 
 
@@ -51,7 +53,7 @@ class ViewModel : ViewModel() {
     // CALCULATE AND GET
     //---------------------------------------------------------------------
     private fun getRandomWord(category: Categories): String {
-        when (category) { // hardcoded
+        val wordToGuess = when (category) {
             Categories.COUNTRY -> countries.random()
             Categories.MOVIE_TITLE -> movies.random()
             Categories.FOOD -> food.random()

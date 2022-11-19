@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
-    category: String = "Test Category",
+    category: Categories = Categories.UNDEFINED,
     NoLives: Int,
     score: Int,
     buttonOptions: List<Pair<Char, Boolean>>,
@@ -115,7 +115,7 @@ fun GameStatus(
 @Composable
 fun GameLayout(
     modifier: Modifier = Modifier,
-    category: String,
+    category: Categories,
 ) {
     Box(
         modifier = modifier

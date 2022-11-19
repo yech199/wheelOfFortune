@@ -13,8 +13,15 @@ enum class Categories(@StringRes val categoryName: Int) {
     ADJECTIVES(R.string.adjectives);
 
     companion object {
-        fun getCategoryEnum(categoryName: Int):
-                Categories? = values().find { it.categoryName == categoryName}
+        fun getCategoryEnum(categoryName: Int): Categories {
+            values().forEach { item ->
+                if (item.categoryName == categoryName)
+                    return item
+            }
+            // Should never happen
+            return UNDEFINED
+        }
+
     }
 }
 

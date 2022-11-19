@@ -23,12 +23,11 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CategoryScreen(
     modifier: Modifier = Modifier,
-    categories: List<String>,
-    onChangeSelection: (String) -> Unit = {},
+    categories: List<Int>,
+    onChangeSelection: (Int) -> Unit = {},
     onButtonClicked: () -> Unit = {}
 ) {
-    var selectedCategory by rememberSaveable { mutableStateOf("") }
-
+    var selectedCategory by rememberSaveable { mutableStateOf(-1) }
     Column(
        modifier = modifier.padding(16.dp)
     ) {
@@ -50,13 +49,13 @@ fun CategoryScreen(
                         onChangeSelection(item)
                     }
                 )
-                Text(text = item)
+                Text(text = stringResource(id = item))
             }
         }
 
         Button(
             modifier = Modifier.fillMaxWidth(),
-            enabled = selectedCategory.isNotEmpty(),
+            enabled = selectedCategory != -1,
             onClick = onButtonClicked
         ) {
             Text(text = stringResource(id = R.string.play_category))
@@ -67,5 +66,5 @@ fun CategoryScreen(
 @Preview
 @Composable
 fun CategoryScreenPreview() {
-    CategoryScreen(categories = listOf("Option 1", "Option 2", "Option 3", "Option 4"))
+//    CategoryScreen(categories = listOf("Option 1", "Option 2", "Option 3", "Option 4"))
 }
