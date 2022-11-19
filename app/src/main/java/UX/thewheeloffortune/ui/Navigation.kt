@@ -96,7 +96,7 @@ fun MainScreen(
             composable(route = Screen.Game.name) {
                 GameScreen(
                     NoLives = uiState.NoLives,
-                    score = uiState.score
+                    score = uiState.score,
                 )
             }
         }

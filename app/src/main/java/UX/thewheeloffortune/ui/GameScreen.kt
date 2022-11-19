@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 fun GameScreen(
     modifier: Modifier = Modifier,
     NoLives: Int,
-    score: Int
+    score: Int,
 ) {
     Column(
         modifier = modifier
