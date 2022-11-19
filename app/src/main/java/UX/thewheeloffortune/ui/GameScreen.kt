@@ -26,8 +26,11 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
+    category: String = "Test Category",
     NoLives: Int,
     score: Int,
+    buttonOptions: List<Pair<Char, Boolean>>,
+    isWheelSpun: Boolean
 ) {
     Column(
         modifier = modifier
@@ -37,6 +40,9 @@ fun GameScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         GameStatus(NoLives = NoLives, score = score)
+        GameLayout(
+            category = category,
+        )
         Interactionable(buttonOptions, onGuess, isWheelSpun)
     }
 }
@@ -106,6 +112,24 @@ fun GameStatus(
     }
 }
 
+@Composable
+fun GameLayout(
+    modifier: Modifier = Modifier,
+    category: String,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(250.dp)
+            .background(
+                color = Color.LightGray,
+                shape = RoundedCornerShape(4.dp)
+            ),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        Text(text = category)
+        }
+    }
 
 @Composable
 fun OptionButton(
