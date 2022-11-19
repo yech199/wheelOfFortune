@@ -104,6 +104,10 @@ fun MainScreen(
                     NoLives = uiState.NoLives,
                     score = uiState.score,
                     wordToGuess = uiState.GameScreenLetters,
+                    onSpinWheel = { /*TODO*/ },
+                    onGuess = { /*TODO*/ },
+//                    visibleLetters = BooleanArray("TOMATO".length),
+                    guess = "TOMATO",
                     buttonOptions = alphabet,
                     isWheelSpun = true
                 )
@@ -128,8 +132,11 @@ fun TopBar(
         navigationIcon = {
             if (canNavBack) {
                 IconButton(onClick = navBack) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = stringResource(
-                        id = R.string.back_button))
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack, contentDescription = stringResource(
+                            id = R.string.back_button
+                        )
+                    )
                 }
             }
         }

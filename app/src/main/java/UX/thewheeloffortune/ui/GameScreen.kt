@@ -8,16 +8,16 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,9 +26,10 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
-    category: Categories = Categories.UNDEFINED,
+    category: Categories = Categories.COUNTRY,
     NoLives: Int,
     score: Int,
+    wordToGuess: String = "    ",
     onSpinWheel: () -> Unit,
     onGuess: () -> Unit, // TODO: (Char) -> Unit
     guess: String,
@@ -47,12 +48,17 @@ fun GameScreen(
             category = category,
             wordToGuess = wordToGuess
         )
+        Interactionable(
+            buttonOptions = buttonOptions,
+            onGuess = onGuess,
+            isWheelSpun = isWheelSpun
         )
     }
 }
 
 @Composable
 private fun Interactionable(
+    modifier: Modifier = Modifier,
     buttonOptions: List<Pair<Char, Boolean>>,
     onGuess: () -> Unit,
     isWheelSpun: Boolean
@@ -65,7 +71,10 @@ private fun Interactionable(
             contentAlignment = Alignment.BottomCenter
         ) {
             LazyVerticalGrid(
-                columns = GridCells.Adaptive(58.dp),
+                modifier = modifier.fillMaxWidth(),
+                columns = GridCells.Adaptive(51.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 items(buttonOptions) { option ->
                     OptionButton(
@@ -184,20 +193,17 @@ fun GameLayout(
 fun OptionButton(
     option: Char,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
     enabled: Boolean
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier
-            .padding(4.dp),
+        shape = RoundedCornerShape(8.dp),
         enabled = enabled,
         contentPadding = PaddingValues(0.dp)
     ) {
         Text(
             text = option.toString(),
-            modifier = modifier
-                .width(10.dp)
+            fontSize = 30.sp
         )
     }
 }
@@ -208,6 +214,10 @@ fun GameScreenPreview() {
     GameScreen(
         NoLives = 5,
         score = 1000,
+        onSpinWheel = { /*TODO*/ },
+        onGuess = { /*TODO*/ },
+//        visibleLetters = BooleanArray("TOMATO".length),
+        guess = "TOMATO",
         buttonOptions = listOf(
             Pair('A', true),
             Pair('B', true),
