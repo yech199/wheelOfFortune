@@ -1,6 +1,7 @@
 package UX.thewheeloffortune.ui
 
 import UX.thewheeloffortune.R
+import UX.thewheeloffortune.data.Options.alphabet
 import UX.thewheeloffortune.ui.theme.TheWheelOfFortuneTheme
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
@@ -97,6 +98,8 @@ fun MainScreen(
                 GameScreen(
                     NoLives = uiState.NoLives,
                     score = uiState.score,
+                    buttonOptions = alphabet,
+                    isWheelSpun = true
                 )
             }
         }

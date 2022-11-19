@@ -26,5 +26,33 @@ object Options {
         Categories.ANIMAL.categoryName,
         Categories.ADJECTIVES.categoryName
     )
+
+    val alphabet = listOf(
+        Pair('A', true),
+        Pair('B', true),
+        Pair('C', true),
+        Pair('D', true),
+        Pair('E', true),
+        Pair('F', true),
+        Pair('G', true),
+        Pair('H', true),
+        Pair('I', true),
+        Pair('J', true),
+        Pair('K', true),
+        Pair('L', true),
+        Pair('M', true),
+        Pair('N', true),
+        Pair('O', true),
+        Pair('P', true),
+        Pair('Q', true),
+        Pair('R', true),
+        Pair('S', true),
+        Pair('T', true),
+        Pair('U', true),
+        Pair('V', true),
+        Pair('W', true),
+        Pair('X', true),
+        Pair('Y', true),
+        Pair('Z', true)
     )
 }
