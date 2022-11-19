@@ -29,6 +29,9 @@ fun GameScreen(
     category: Categories = Categories.UNDEFINED,
     NoLives: Int,
     score: Int,
+    onSpinWheel: () -> Unit,
+    onGuess: () -> Unit, // TODO: (Char) -> Unit
+    guess: String,
     buttonOptions: List<Pair<Char, Boolean>>,
     isWheelSpun: Boolean
 ) {
@@ -42,8 +45,9 @@ fun GameScreen(
         GameStatus(NoLives = NoLives, score = score)
         GameLayout(
             category = category,
+            wordToGuess = wordToGuess
         )
-        Interactionable(buttonOptions, onGuess, isWheelSpun)
+        )
     }
 }
 
@@ -116,20 +120,65 @@ fun GameStatus(
 fun GameLayout(
     modifier: Modifier = Modifier,
     category: Categories,
+    wordToGuess: String
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(250.dp)
             .background(
-                color = Color.LightGray,
+                color = Color(242, 237, 245),
                 shape = RoundedCornerShape(4.dp)
             ),
         contentAlignment = Alignment.TopCenter
     ) {
-        Text(text = category)
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .padding(top = 5.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(id = category.categoryName),
+                fontSize = 25.sp
+            )
+
+            LazyVerticalGrid(
+                modifier = modifier,
+                columns = GridCells.Adaptive(33.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(
+                    start = 12.dp,
+                    top = 16.dp,
+                    end = 12.dp,
+                    bottom = 16.dp
+                )
+            ) {
+                items(wordToGuess.toList()) { letter ->
+                    BoxWithConstraints (
+                        modifier = modifier
+                            .background(
+                                Color(181, 179, 186),
+                                RoundedCornerShape(4.dp)
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = letter.toString(),
+                            fontSize = 30.sp
+                        )
+                    }
+                }
+            }
         }
     }
+}
+
+//var yes: Boolean = wordToGuess.contains('E', ignoreCase = true)
+//Text(text = yes.toString())
+
 
 @Composable
 fun OptionButton(

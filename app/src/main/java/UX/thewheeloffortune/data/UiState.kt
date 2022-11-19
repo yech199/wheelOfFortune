@@ -10,6 +10,7 @@ data class UiState(
     val score: Int = 0,
 
     val currentWordToGuess: String = "",
+    val GameScreenLetters: String = "",
     val isGuessValid: Boolean = false,
     val isGameOver: Boolean = false
 )

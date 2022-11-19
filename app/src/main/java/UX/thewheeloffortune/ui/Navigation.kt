@@ -3,6 +3,7 @@ package UX.thewheeloffortune.ui
 import UX.thewheeloffortune.R
 import UX.thewheeloffortune.data.Categories
 import UX.thewheeloffortune.data.Options.alphabet
+import UX.thewheeloffortune.data.Options.categories
 import UX.thewheeloffortune.ui.theme.TheWheelOfFortuneTheme
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -21,8 +23,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import UX.thewheeloffortune.data.Options.categories
-import androidx.compose.ui.platform.LocalContext
 
 /**
  * stringRessource can only be used in composables. Therefore the title is not a string
@@ -46,7 +46,7 @@ fun MainScreen(
     val backStackEntry by navController.currentBackStackEntryAsState()
     // The name of the current screen
     val currentScreen = Screen.valueOf(
-        backStackEntry ?.destination ?.route ?: Screen.MainMenu.name
+        backStackEntry?.destination?.route ?: Screen.MainMenu.name
     )
 
     Scaffold(
@@ -69,14 +69,17 @@ fun MainScreen(
                     onPlayClicked = { navController.navigate(Screen.Category.name) },
                     onHighScoresClicked = { navController.navigate(Screen.HighScores.name) },
                     onSettingsClicked = { navController.navigate(Screen.Settings.name) },
-                    onHelpClicked = { navController.navigate(Screen.Help.name)}
+                    onHelpClicked = { navController.navigate(Screen.Help.name) }
                 )
             }
             composable(route = Screen.Category.name) {
                 val context = LocalContext.current
                 CategoryScreen(
                     categories = categories,
-                    onButtonClicked = { navController.navigate(Screen.Game.name) },
+                    onButtonClicked = {
+                        viewModel.setWordToBeGuessed()
+                        navController.navigate(Screen.Game.name)
+                    },
                     onChangeSelection = { viewModel.setCategory(Categories.getCategoryEnum(it)) }
                 )
             }
@@ -100,6 +103,7 @@ fun MainScreen(
                     category = uiState.category,
                     NoLives = uiState.NoLives,
                     score = uiState.score,
+                    wordToGuess = uiState.GameScreenLetters,
                     buttonOptions = alphabet,
                     isWheelSpun = true
                 )

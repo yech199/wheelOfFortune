@@ -1,6 +1,5 @@
 package UX.thewheeloffortune.ui
 
-import UX.thewheeloffortune.data.UiState
 import UX.thewheeloffortune.data.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,12 +41,17 @@ class ViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 category = category,
-                currentWordToGuess = getRandomWord(category)
             )
         }
-
     }
 
+    fun setWordToBeGuessed() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                currentWordToGuess = getRandomWord(uiState.value.category),
+            )
+        }
+    }
 
     //---------------------------------------------------------------------
     // CALCULATE AND GET
@@ -62,11 +66,17 @@ class ViewModel : ViewModel() {
             Categories.UNDEFINED -> getRandomWord(Categories.COUNTRY)
         }
 
-        if (usedWords.contains(wordToGuess)) {
-            return getRandomWord(category)
-        }
+//        if (usedWords.contains(wordToGuess)) {
+//            return getRandomWord(category)
+//        }
 
         usedWords.add(wordToGuess)
+
+        _uiState.update { currentState ->
+            currentState.copy(
+                GameScreenLetters = "".padStart(wordToGuess.length, ' ')
+            )
+        }
         return wordToGuess.uppercase()
     }
 }
