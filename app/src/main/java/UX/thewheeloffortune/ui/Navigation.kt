@@ -100,16 +100,16 @@ fun MainScreen(
             }
             composable(route = Screen.Game.name) {
                 GameScreen(
-                    category = uiState.category,
                     NoLives = uiState.NoLives,
                     score = uiState.score,
+                    category = uiState.category,
                     wordToGuess = uiState.GameScreenLetters,
-                    onSpinWheel = { /*TODO*/ },
+                    isWheelSpun = uiState.isWheelSpun,
+                    onSpinWheel = { viewModel.spinWheel() },
                     onGuess = { /*TODO*/ },
 //                    visibleLetters = BooleanArray("TOMATO".length),
                     guess = "TOMATO",
                     buttonOptions = alphabet,
-                    isWheelSpun = true
                 )
             }
         }

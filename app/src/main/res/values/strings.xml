@@ -31,6 +31,7 @@
 
     <!-- Game Screen -->
     <string name="score">Score: %d</string>
+    <string name="spin_wheel">Spin Wheel</string>
 
 
     <!-- Gamed Ended Screen -->

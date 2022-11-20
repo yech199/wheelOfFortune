@@ -22,7 +22,6 @@ class ViewModel : ViewModel() {
     private var usedLetters: MutableSet<Char> = mutableSetOf()
 
     private var usedWords: MutableSet<String> = mutableSetOf()
-    private lateinit var wordToGuess: String
 
 
     init {
@@ -32,6 +31,17 @@ class ViewModel : ViewModel() {
     fun resetGame() {
         usedLetters.clear()
         _uiState.value = UiState(category = Categories.UNDEFINED)
+    }
+
+    fun spinWheel() {
+        val point = points.random()
+
+        _uiState.update { currentState ->
+            currentState.copy(
+                currentPointChance = point,
+                isWheelSpun = true
+            )
+        }
     }
 
     //---------------------------------------------------------------------
@@ -54,7 +64,7 @@ class ViewModel : ViewModel() {
     }
 
     //---------------------------------------------------------------------
-    // CALCULATE AND GET
+    // Private functions
     //---------------------------------------------------------------------
     private fun getRandomWord(category: Categories): String {
         val wordToGuess = when (category) {

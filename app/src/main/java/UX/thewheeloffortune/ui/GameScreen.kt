@@ -26,15 +26,15 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
-    category: Categories = Categories.COUNTRY,
     NoLives: Int,
     score: Int,
+    category: Categories = Categories.COUNTRY,
     wordToGuess: String = "    ",
+    isWheelSpun: Boolean,
     onSpinWheel: () -> Unit,
     onGuess: () -> Unit, // TODO: (Char) -> Unit
     guess: String,
     buttonOptions: List<Pair<Char, Boolean>>,
-    isWheelSpun: Boolean
 ) {
     Column(
         modifier = modifier
@@ -49,44 +49,11 @@ fun GameScreen(
             wordToGuess = wordToGuess
         )
         Interactionable(
+            isWheelSpun = isWheelSpun,
+            onSpinWheel = onSpinWheel,
             buttonOptions = buttonOptions,
             onGuess = onGuess,
-            isWheelSpun = isWheelSpun
         )
-    }
-}
-
-@Composable
-private fun Interactionable(
-    modifier: Modifier = Modifier,
-    buttonOptions: List<Pair<Char, Boolean>>,
-    onGuess: () -> Unit,
-    isWheelSpun: Boolean
-) {
-    if (isWheelSpun) {
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            LazyVerticalGrid(
-                modifier = modifier.fillMaxWidth(),
-                columns = GridCells.Adaptive(51.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalArrangement = Arrangement.spacedBy(5.dp)
-            ) {
-                items(buttonOptions) { option ->
-                    OptionButton(
-                        option = option.first,
-                        onClick = onGuess,
-                        enabled = option.second
-                    )
-                }
-            }
-        }
-    } else {
-
     }
 }
 
@@ -124,6 +91,7 @@ fun GameStatus(
         )
     }
 }
+
 
 @Composable
 fun GameLayout(
@@ -185,9 +153,50 @@ fun GameLayout(
     }
 }
 
-//var yes: Boolean = wordToGuess.contains('E', ignoreCase = true)
-//Text(text = yes.toString())
-
+@Composable
+private fun Interactionable(
+    modifier: Modifier = Modifier,
+    onGuess: () -> Unit,
+    onSpinWheel: () -> Unit,
+    buttonOptions: List<Pair<Char, Boolean>>,
+    isWheelSpun: Boolean
+) {
+    if (isWheelSpun) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            LazyVerticalGrid(
+                modifier = modifier.fillMaxWidth(),
+                columns = GridCells.Adaptive(51.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
+            ) {
+                items(buttonOptions) { option ->
+                    OptionButton(
+                        option = option.first,
+                        onClick = onGuess,
+                        enabled = option.second
+                    )
+                }
+            }
+        }
+    } else {
+        Spacer(modifier = modifier.height(10.dp))
+        Button(
+            modifier = Modifier.fillMaxWidth()
+                .height(80.dp),
+            onClick = onSpinWheel
+        ) {
+            Text(
+                text = stringResource(id = R.string.spin_wheel),
+                fontSize = 45.sp
+            )
+        }
+    }
+}
 
 @Composable
 fun OptionButton(
@@ -214,6 +223,7 @@ fun GameScreenPreview() {
     GameScreen(
         NoLives = 5,
         score = 1000,
+        isWheelSpun = false,
         onSpinWheel = { /*TODO*/ },
         onGuess = { /*TODO*/ },
 //        visibleLetters = BooleanArray("TOMATO".length),
@@ -234,7 +244,6 @@ fun GameScreenPreview() {
             Pair('M', false),
             Pair('N', false),
         ),
-        isWheelSpun = true
     )
 }
 
