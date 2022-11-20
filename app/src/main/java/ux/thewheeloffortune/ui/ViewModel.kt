@@ -1,9 +1,6 @@
 package UX.thewheeloffortune.ui
 
 import UX.thewheeloffortune.data.*
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +24,7 @@ class ViewModel : ViewModel() {
 
     fun resetGame() {
         usedLetters.clear()
-        _uiState.value = UiState(category = Categories.UNDEFINED)
+        _uiState.value = UiState()
     }
 
     fun spinWheel() {
@@ -50,9 +47,10 @@ class ViewModel : ViewModel() {
     }
 
     fun checkGuess(guess: Char) {
+        // Disable button
         val letterButtons: MutableList<Pair<Char, Boolean>> = ArrayList()
-            uiState.value.gameButtons.forEach { button ->
-                val tmp: Pair<Char, Boolean>
+        uiState.value.gameButtons.forEach { button ->
+            val tmp: Pair<Char, Boolean>
             if (button.first == guess) {
                 tmp = button.copy(second = false)
                 letterButtons.add(tmp)
@@ -94,6 +92,16 @@ class ViewModel : ViewModel() {
                 GameScreenLetters = hiddenWord.concatToString(),
                 gameButtons = letterButtons
             )
+        }
+
+        if (!uiState.value.GameScreenLetters.contains(' ')
+            || uiState.value.NoLives < 1
+        ) {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    isGameOver = true
+                )
+            }
         }
     }
 

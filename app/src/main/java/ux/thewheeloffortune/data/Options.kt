@@ -20,7 +20,6 @@ enum class Categories(@StringRes val categoryName: Int) {
             // Should never happen
             return UNDEFINED
         }
-
     }
 }
 

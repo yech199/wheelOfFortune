@@ -38,6 +38,15 @@
     <string name="spin_again">Spin Again</string>
     <string name="used_letters">Used letters: %s</string>
 
+    <string name="game_lost">The Game is Lost</string>
+    <string name="lose_msg">Better luck next time!</string>
+    <string name="exit">Exit Game</string>
+    <string name="play_again">Play Again</string>
+    <string name="congratz">Congratulations!!</string>
+    <string name="winner_score">You scored: %d</string>
+    <string name="winner_life">Lives left: %d</string>
+
+
 
     <!-- Gamed Ended Screen -->
 </resources>

@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -35,6 +37,9 @@ fun GameScreen(
     currentPointChance: Int = 0,
     buttonOptions: List<Pair<Char, Boolean>>,
     onGuess: (Char) -> Unit,
+    isGameEnded: Boolean = false,
+    onPlayAgain: () -> Unit,
+    onExit: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -55,6 +60,20 @@ fun GameScreen(
             buttonOptions = buttonOptions,
             onGuess = onGuess
         )
+
+        if (NoLives < 1) {
+            GameLostDialog(
+                onPlayAgain = onPlayAgain,
+                onExit = onExit
+            )
+        } else if (isGameEnded) {
+            GameWonDialog(
+                NoLives = NoLives,
+                score = score,
+                onPlayAgain = onPlayAgain,
+                onExit = onExit
+            )
+        }
     }
 }
 
@@ -258,6 +277,59 @@ fun OptionButton(
     }
 }
 
+@Composable
+fun GameLostDialog(
+    modifier: Modifier = Modifier,
+    onPlayAgain: () -> Unit,
+    onExit: () -> Unit,
+) {
+    AlertDialog(
+        modifier = modifier,
+        onDismissRequest = {},
+        title = { Text(text = stringResource(id = R.string.game_lost)) },
+        text = { Text(text = stringResource(id = R.string.lose_msg)) },
+        dismissButton = {
+            TextButton(onClick = onExit) {
+                Text(text = stringResource(id = R.string.exit))
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onPlayAgain) {
+                Text(text = stringResource(id = R.string.play_again))
+            }
+        }
+    )
+}
+
+@Composable
+fun GameWonDialog(
+    modifier: Modifier = Modifier,
+    NoLives: Int,
+    score: Int,
+    onPlayAgain: () -> Unit,
+    onExit: () -> Unit
+) {
+    AlertDialog(
+        modifier = modifier,
+        onDismissRequest = {},
+        title = { Text(text = stringResource(id = R.string.congratz)) },
+        text = {
+            Text(text = stringResource(id = R.string.winner_score, score))
+            Text(text = stringResource(id = R.string.winner_life, NoLives))
+        },
+        dismissButton = {
+            TextButton(onClick = onExit) {
+                Text(text = stringResource(id = R.string.exit))
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onPlayAgain) {
+                Text(text = stringResource(id = R.string.play_again))
+            }
+        }
+    )
+}
+
 @Preview
 @Composable
 fun GameScreenPreview() {
@@ -284,20 +356,7 @@ fun GameScreenPreview() {
             Pair('M', false),
             Pair('N', false),
         ),
+        onPlayAgain = {},
+        onExit = {}
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

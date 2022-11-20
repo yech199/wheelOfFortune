@@ -60,7 +60,7 @@ fun MainScreen(
 
         NavHost(
             navController = navController,
-            startDestination = Screen.Category.name,
+            startDestination = Screen.MainMenu.name,
             modifier = modifier.padding(innerPadding)
         ) {
             composable(route = Screen.MainMenu.name) {
