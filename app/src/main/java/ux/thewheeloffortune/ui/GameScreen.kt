@@ -314,8 +314,12 @@ fun GameWonDialog(
         onDismissRequest = {},
         title = { Text(text = stringResource(id = R.string.congratz)) },
         text = {
-            Text(text = stringResource(id = R.string.winner_score, score))
-            Text(text = stringResource(id = R.string.winner_life, NoLives))
+            Column(
+                modifier = modifier.fillMaxWidth()
+            ) {
+                Text(text = stringResource(id = R.string.winner_score, score))
+                Text(text = stringResource(id = R.string.winner_life, NoLives))
+            }
         },
         dismissButton = {
             TextButton(onClick = onExit) {
