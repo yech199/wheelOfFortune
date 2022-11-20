@@ -14,6 +14,5 @@ data class UiState(
     val currentPointChance: Int = -1,
     val gameButtons: List<Pair<Char, Boolean>> = Options.alphabet,
 
-    val isGuessValid: Boolean = false,
     val isGameOver: Boolean = false
 )

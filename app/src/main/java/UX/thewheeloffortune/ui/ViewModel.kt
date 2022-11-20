@@ -50,6 +50,19 @@ class ViewModel : ViewModel() {
     }
 
     fun checkGuess(guess: Char) {
+        val letterButtons: MutableList<Pair<Char, Boolean>> = ArrayList()
+            uiState.value.gameButtons.forEach { button ->
+                val tmp: Pair<Char, Boolean>
+            if (button.first == guess) {
+                tmp = button.copy(second = false)
+                letterButtons.add(tmp)
+            } else {
+                tmp = button.copy()
+                letterButtons.add(tmp)
+            }
+        }
+
+        // Check if guess is part of wordToGuess -> Update hiddenWord
         var letterOccurrence = 0
         usedLetters.add(guess)
         val wordToGuess = uiState.value.currentWordToGuess.toList()
@@ -60,9 +73,8 @@ class ViewModel : ViewModel() {
                 letterOccurrence++
             }
         }
-        println(hiddenWord.concatToString())
 
-
+        // If guess is wrong -> Lose one life
         if (!hiddenWord.contains(guess)) {
             _uiState.update { currentState ->
                 currentState.copy(
@@ -73,12 +85,14 @@ class ViewModel : ViewModel() {
 
         }
 
+        // Always update these when guessing
         _uiState.update { currentState ->
             currentState.copy(
                 score = uiState.value.score +
                         (uiState.value.currentPointChance * letterOccurrence),
                 isWheelSpun = false,
-                GameScreenLetters = hiddenWord.concatToString()
+                GameScreenLetters = hiddenWord.concatToString(),
+                gameButtons = letterButtons
             )
         }
     }
