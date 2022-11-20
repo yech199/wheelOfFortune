@@ -33,9 +33,8 @@ fun GameScreen(
     isWheelSpun: Boolean,
     onSpinWheel: () -> Unit,
     currentPointChance: Int = 0,
-    onGuess: () -> Unit, // TODO: (Char) -> Unit
-    guess: String,
     buttonOptions: List<Pair<Char, Boolean>>,
+    onGuess: (Char) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -54,7 +53,7 @@ fun GameScreen(
             onSpinWheel = onSpinWheel,
             currentPointChance = currentPointChance,
             buttonOptions = buttonOptions,
-            onGuess = onGuess,
+            onGuess = onGuess
         )
     }
 }
@@ -136,7 +135,7 @@ fun GameLayout(
                 )
             ) {
                 items(wordToGuess.toList()) { letter ->
-                    BoxWithConstraints (
+                    BoxWithConstraints(
                         modifier = modifier
                             .background(
                                 Color(181, 179, 186),
@@ -158,11 +157,11 @@ fun GameLayout(
 @Composable
 private fun Interactionable(
     modifier: Modifier = Modifier,
-    onGuess: () -> Unit,
+    isWheelSpun: Boolean,
     onSpinWheel: () -> Unit,
     currentPointChance: Int,
     buttonOptions: List<Pair<Char, Boolean>>,
-    isWheelSpun: Boolean,
+    onGuess: (Char) -> Unit,
 ) {
 
     if (isWheelSpun) {
@@ -241,11 +240,13 @@ private fun Interactionable(
 @Composable
 fun OptionButton(
     option: Char,
-    onClick: () -> Unit,
+    onClick: (Char) -> Unit,
     enabled: Boolean
 ) {
     Button(
-        onClick = onClick,
+        onClick = {
+            onClick(option)
+        },
         shape = RoundedCornerShape(8.dp),
         enabled = enabled,
         contentPadding = PaddingValues(0.dp)
@@ -268,7 +269,6 @@ fun GameScreenPreview() {
         currentPointChance = 250,
         onGuess = {},
 //        visibleLetters = BooleanArray("TOMATO".length),
-        guess = "TOMATO",
         buttonOptions = listOf(
             Pair('A', true),
             Pair('B', true),

@@ -35,7 +35,8 @@ class ViewModel : ViewModel() {
 
     fun spinWheel() {
         val point = points.random()
-
+        if (point == -1 && uiState.value.currentPointChance == -1)
+            return spinWheel()
         _uiState.update { currentState ->
             currentState.copy(
                 isWheelSpun = true,
@@ -46,16 +47,15 @@ class ViewModel : ViewModel() {
             _uiState.update { currentState ->
                 currentState.copy(
                     score = 0,
-                    isWheelSpun = false,
                 )
             }
         }
     }
 
-    fun onBankrupt() {
+    fun checkGuess(guess: Char) {
         _uiState.update { currentState ->
             currentState.copy(
-                score = 0,
+                score = uiState.value.score + uiState.value.currentPointChance,
                 isWheelSpun = false,
             )
         }
@@ -76,6 +76,7 @@ class ViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 currentWordToGuess = getRandomWord(uiState.value.category),
+                score = 0,
             )
         }
     }

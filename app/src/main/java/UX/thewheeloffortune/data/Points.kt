@@ -1,7 +1,7 @@
 package UX.thewheeloffortune.data
 
 val points: Set<Int> = setOf(
-    0, // Bankrupt
+    -1, // Bankrupt
     150,
     200,
     250,

@@ -107,10 +107,8 @@ fun MainScreen(
                     isWheelSpun = uiState.isWheelSpun,
                     onSpinWheel = { viewModel.spinWheel() },
                     currentPointChance = uiState.currentPointChance,
-                    onGuess = { /*TODO*/ },
-//                    visibleLetters = BooleanArray("TOMATO".length),
-                    guess = "TOMATO",
-                    buttonOptions = alphabet,
+                    buttonOptions = uiState.gameButtons,
+                    onGuess = { viewModel.checkGuess(it) },
                 )
             }
         }
