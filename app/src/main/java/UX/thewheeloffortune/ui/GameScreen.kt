@@ -196,7 +196,7 @@ private fun Interactionable(
                         OptionButton(
                             option = option.first,
                             onClick = onGuess,
-                            enabled = option.second
+                            isEnabled = option.second
                         )
                     }
                 }
@@ -241,14 +241,14 @@ private fun Interactionable(
 fun OptionButton(
     option: Char,
     onClick: (Char) -> Unit,
-    enabled: Boolean
+    isEnabled: Boolean
 ) {
     Button(
         onClick = {
             onClick(option)
         },
         shape = RoundedCornerShape(8.dp),
-        enabled = enabled,
+        enabled = isEnabled,
         contentPadding = PaddingValues(0.dp)
     ) {
         Text(
@@ -268,7 +268,6 @@ fun GameScreenPreview() {
         onSpinWheel = {},
         currentPointChance = 250,
         onGuess = {},
-//        visibleLetters = BooleanArray("TOMATO".length),
         buttonOptions = listOf(
             Pair('A', true),
             Pair('B', true),

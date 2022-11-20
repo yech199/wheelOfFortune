@@ -17,10 +17,7 @@ class ViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
-    var letterGuess by mutableStateOf("")
-        private set
     private var usedLetters: MutableSet<Char> = mutableSetOf()
-
     private var usedWords: MutableSet<String> = mutableSetOf()
 
 
@@ -53,10 +50,35 @@ class ViewModel : ViewModel() {
     }
 
     fun checkGuess(guess: Char) {
+        var letterOccurrence = 0
+        usedLetters.add(guess)
+        val wordToGuess = uiState.value.currentWordToGuess.toList()
+        val hiddenWord = uiState.value.GameScreenLetters.toCharArray()
+        for ((i, letter) in wordToGuess.withIndex()) {
+            if (letter == guess) {
+                hiddenWord[i] = letter
+                letterOccurrence++
+            }
+        }
+        println(hiddenWord.concatToString())
+
+
+        if (!hiddenWord.contains(guess)) {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    NoLives = uiState.value.NoLives - 1,
+                    isWheelSpun = false,
+                )
+            }
+
+        }
+
         _uiState.update { currentState ->
             currentState.copy(
-                score = uiState.value.score + uiState.value.currentPointChance,
+                score = uiState.value.score +
+                        (uiState.value.currentPointChance * letterOccurrence),
                 isWheelSpun = false,
+                GameScreenLetters = hiddenWord.concatToString()
             )
         }
     }
