@@ -106,6 +106,7 @@ fun MainScreen(
                     wordToGuess = uiState.GameScreenLetters,
                     isWheelSpun = uiState.isWheelSpun,
                     onSpinWheel = { viewModel.spinWheel() },
+                    currentPointChance = uiState.currentPointChance,
                     onGuess = { /*TODO*/ },
 //                    visibleLetters = BooleanArray("TOMATO".length),
                     guess = "TOMATO",

@@ -29,9 +29,10 @@ fun GameScreen(
     NoLives: Int,
     score: Int,
     category: Categories = Categories.COUNTRY,
-    wordToGuess: String = "    ",
+    wordToGuess: String = "            ",
     isWheelSpun: Boolean,
     onSpinWheel: () -> Unit,
+    currentPointChance: Int = 0,
     onGuess: () -> Unit, // TODO: (Char) -> Unit
     guess: String,
     buttonOptions: List<Pair<Char, Boolean>>,
@@ -51,6 +52,7 @@ fun GameScreen(
         Interactionable(
             isWheelSpun = isWheelSpun,
             onSpinWheel = onSpinWheel,
+            currentPointChance = currentPointChance,
             buttonOptions = buttonOptions,
             onGuess = onGuess,
         )
@@ -158,35 +160,73 @@ private fun Interactionable(
     modifier: Modifier = Modifier,
     onGuess: () -> Unit,
     onSpinWheel: () -> Unit,
+    currentPointChance: Int,
     buttonOptions: List<Pair<Char, Boolean>>,
-    isWheelSpun: Boolean
+    isWheelSpun: Boolean,
 ) {
+
     if (isWheelSpun) {
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            LazyVerticalGrid(
-                modifier = modifier.fillMaxWidth(),
-                columns = GridCells.Adaptive(51.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalArrangement = Arrangement.spacedBy(5.dp)
+        if (currentPointChance != -1) {
+            Text(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.CenterHorizontally),
+                text = stringResource(id = R.string.cur_point, currentPointChance),
+                fontSize = 30.sp
+            )
+            Text(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.CenterHorizontally),
+                text = stringResource(id = R.string.game_msg),
+                fontSize = 30.sp
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.BottomCenter
             ) {
-                items(buttonOptions) { option ->
-                    OptionButton(
-                        option = option.first,
-                        onClick = onGuess,
-                        enabled = option.second
-                    )
+                LazyVerticalGrid(
+                    modifier = modifier.fillMaxWidth(),
+                    columns = GridCells.Adaptive(51.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    items(buttonOptions) { option ->
+                        OptionButton(
+                            option = option.first,
+                            onClick = onGuess,
+                            enabled = option.second
+                        )
+                    }
                 }
+            }
+        } else {
+            Text(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.CenterHorizontally),
+                text = stringResource(id = R.string.bankrupt),
+                fontSize = 30.sp
+            )
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp),
+                onClick = onSpinWheel
+            ) {
+                Text(
+                    text = stringResource(id = R.string.spin_again),
+                    fontSize = 45.sp
+                )
             }
         }
     } else {
         Spacer(modifier = modifier.height(10.dp))
         Button(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .height(80.dp),
             onClick = onSpinWheel
         ) {
@@ -223,9 +263,10 @@ fun GameScreenPreview() {
     GameScreen(
         NoLives = 5,
         score = 1000,
-        isWheelSpun = false,
-        onSpinWheel = { /*TODO*/ },
-        onGuess = { /*TODO*/ },
+        isWheelSpun = true,
+        onSpinWheel = {},
+        currentPointChance = 250,
+        onGuess = {},
 //        visibleLetters = BooleanArray("TOMATO".length),
         guess = "TOMATO",
         buttonOptions = listOf(

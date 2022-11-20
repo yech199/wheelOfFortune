@@ -38,8 +38,25 @@ class ViewModel : ViewModel() {
 
         _uiState.update { currentState ->
             currentState.copy(
-                currentPointChance = point,
-                isWheelSpun = true
+                isWheelSpun = true,
+                currentPointChance = point
+            )
+        }
+        if (point == -1) {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    score = 0,
+                    isWheelSpun = false,
+                )
+            }
+        }
+    }
+
+    fun onBankrupt() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                score = 0,
+                isWheelSpun = false,
             )
         }
     }
