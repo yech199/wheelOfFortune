@@ -6,6 +6,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 /**
  * Holds the logic and calculations of the app
@@ -24,7 +27,8 @@ class ViewModel : ViewModel() {
 
     fun resetGame() {
         usedLetters.clear()
-        _uiState.value = UiState()
+        val cat = uiState.value.category
+        _uiState.value = UiState(category = cat)
     }
 
     fun spinWheel() {
@@ -128,13 +132,16 @@ class ViewModel : ViewModel() {
     //---------------------------------------------------------------------
     // Private functions
     //---------------------------------------------------------------------
-    private fun getRandomWord(category: Categories): String {
+    private fun getRandomWord(
+        category: Categories
+    ): String {
+        val seed = Random(Date().time)
         val wordToGuess = when (category) {
-            Categories.COUNTRY -> countries.random()
-            Categories.MOVIE_TITLE -> movies.random()
-            Categories.FOOD -> food.random()
-            Categories.ANIMAL -> animals.random()
-            Categories.ADJECTIVES -> adjectives.random()
+            Categories.COUNTRY -> countries.random(seed)
+            Categories.MOVIE_TITLE -> movies.random(seed)
+            Categories.FOOD -> food.random(seed)
+            Categories.ANIMAL -> animals.random(seed)
+            Categories.ADJECTIVES -> adjectives.random(seed)
             Categories.UNDEFINED -> getRandomWord(Categories.COUNTRY)
         }
 
