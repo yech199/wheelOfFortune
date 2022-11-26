@@ -97,11 +97,11 @@ fun MainScreen(
                     onGuess = { viewModel.checkGuess(it) },
                     isGameEnded = uiState.isGameOver,
                     onPlayAgain = {
-                        navController.navigate(Screen.Category.name)
+                        navController.popBackStack(Screen.Category.name, inclusive = false)
                         viewModel.resetGame()
                     },
                     onExit = {
-                        navController.navigate(Screen.MainMenu.name)
+                        navController.popBackStack(Screen.MainMenu.name, inclusive = false)
                         viewModel.resetGame()
                     }
                 
