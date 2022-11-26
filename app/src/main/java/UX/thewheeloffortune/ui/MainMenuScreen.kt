@@ -21,7 +21,6 @@ fun MainMenuScreen(
     modifier: Modifier = Modifier,
     onPlayClicked: () -> Unit,
     onHighScoresClicked: () -> Unit,
-    onSettingsClicked: () -> Unit,
     onHelpClicked: () -> Unit
 ) {
     Column(
@@ -61,16 +60,6 @@ fun MainMenuScreen(
 
         Spacer(modifier = Modifier.height(50.dp))
         OutlinedButton(
-            onClick = onSettingsClicked
-        ) {
-            Text(
-                text = stringResource(id = R.string.settings),
-                fontSize = 22.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.height(50.dp))
-        OutlinedButton(
             onClick = onHelpClicked
         ) {
             Text(
@@ -87,7 +76,6 @@ fun MainMenuScreenPreview() {
     MainMenuScreen(
         onPlayClicked = { },
         onHighScoresClicked = { },
-        onSettingsClicked = { },
         onHelpClicked = { }
     )
 }

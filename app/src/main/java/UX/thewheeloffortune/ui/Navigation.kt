@@ -27,7 +27,6 @@ enum class Screen(@StringRes val title: Int) {
     MainMenu(title = R.string.main_menu),
     Category(title = R.string.categories),
     HighScores(title = R.string.high_scores),
-    Settings(title = R.string.settings),
     Help(title = R.string.help),
     Game(title = R.string.app_name),
 }
@@ -64,7 +63,6 @@ fun MainScreen(
                 MainMenuScreen(
                     onPlayClicked = { navController.navigate(Screen.Category.name) },
                     onHighScoresClicked = { navController.navigate(Screen.HighScores.name) },
-                    onSettingsClicked = { navController.navigate(Screen.Settings.name) },
                     onHelpClicked = { navController.navigate(Screen.Help.name) }
                 )
             }
@@ -82,13 +80,6 @@ fun MainScreen(
 //                HighScoreScreen(
 //                    onButtonClicked = { navController.navigate(Screen.Game.name) }
 //                )
-            }
-            composable(route = Screen.Settings.name) {
-                SettingsScreen(
-                    // TODO: Make toggle work!
-                    isDarkMode = false,
-                    onDarkModeChanged = {}
-                )
             }
             composable(route = Screen.Help.name) {
                 HelpScreen()
