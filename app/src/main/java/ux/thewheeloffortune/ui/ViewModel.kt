@@ -20,8 +20,8 @@ class ViewModel : ViewModel() {
     private var usedLetters: MutableSet<Char> = mutableSetOf()
     private var usedWords: MutableSet<String> = mutableSetOf()
 
-
     init {
+        usedWords.clear()
         resetGame()
     }
 

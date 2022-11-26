@@ -3,7 +3,6 @@ package UX.thewheeloffortune.ui
 import UX.thewheeloffortune.R
 import UX.thewheeloffortune.data.Categories
 import UX.thewheeloffortune.data.Options.categories
-import UX.thewheeloffortune.ui.theme.TheWheelOfFortuneTheme
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -15,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -111,12 +109,13 @@ fun MainScreen(
                     isGameEnded = uiState.isGameOver,
                     onPlayAgain = {
                         navController.navigate(Screen.Category.name)
-//                        viewModel.resetGame()
+                        viewModel.resetGame()
                     },
                     onExit = {
                         navController.navigate(Screen.MainMenu.name)
-//                        viewModel.resetGame()
+                        viewModel.resetGame()
                     }
+                
                 )
             }
         }
@@ -149,12 +148,4 @@ fun TopBar(
         }
 
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ScreenPreview() {
-    TheWheelOfFortuneTheme {
-        MainScreen()
-    }
 }
