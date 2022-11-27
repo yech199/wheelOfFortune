@@ -118,9 +118,10 @@ class ViewModel : ViewModel() {
     }
 
     fun setWordToBeGuessed() {
+        val word = getRandomWord(uiState.value.category)
         _uiState.update { currentState ->
             currentState.copy(
-                currentWordToGuess = getRandomWord(uiState.value.category),
+                currentWordToGuess = word,
                 score = 0,
             )
         }
