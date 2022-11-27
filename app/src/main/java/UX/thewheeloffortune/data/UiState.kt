@@ -12,6 +12,5 @@ data class UiState(
     val isWheelSpun: Boolean = false,
     val currentPointChance: Int = -1,
     val gameButtons: List<Pair<Char, Boolean>> = Options.alphabet,
-
     val isGameOver: Boolean = false
 )
