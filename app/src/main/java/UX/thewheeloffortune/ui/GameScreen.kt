@@ -25,6 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+/**
+ * Screen where the game is displayed
+ */
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
@@ -77,6 +80,9 @@ fun GameScreen(
     }
 }
 
+/**
+ * Status bar displaying remaining lives and score
+ */
 @Composable
 fun GameStatus(
     modifier: Modifier = Modifier,
@@ -112,7 +118,9 @@ fun GameStatus(
     }
 }
 
-
+/**
+ * The part of the screen that displays the chosen category and the hidden word
+ */
 @Composable
 fun GameLayout(
     modifier: Modifier = Modifier,
@@ -173,6 +181,12 @@ fun GameLayout(
     }
 }
 
+/**
+ * Everything under the GameLayout
+ * - Button for spinning wheel
+ * - Buttons used for guessing
+ * - Text showing how many points the guess will give per occurrence if correct
+ */
 @Composable
 private fun Interactionable(
     modifier: Modifier = Modifier,
@@ -256,6 +270,9 @@ private fun Interactionable(
     }
 }
 
+/**
+ * Button used for guessing a letter
+ */
 @Composable
 fun OptionButton(
     option: Char,
@@ -277,6 +294,10 @@ fun OptionButton(
     }
 }
 
+/**
+ * Popup dialog when the game is lost.
+ * - From here the player can quit the game or start over
+ */
 @Composable
 fun GameLostDialog(
     modifier: Modifier = Modifier,
@@ -301,6 +322,10 @@ fun GameLostDialog(
     )
 }
 
+/**
+ * Popup dialog when the game is won.
+ * - From here the player can quit the game or start over
+ */
 @Composable
 fun GameWonDialog(
     modifier: Modifier = Modifier,
