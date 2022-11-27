@@ -144,9 +144,12 @@ class ViewModel : ViewModel() {
             Categories.UNDEFINED -> getRandomWord(Categories.COUNTRY)
         }
 
-//        if (usedWords.contains(wordToGuess)) {
-//            return getRandomWord(category)
-//        }
+        if (usedWords.size >= 20)
+            usedWords.clear()
+
+        if (usedWords.contains(wordToGuess)) {
+            return getRandomWord(category)
+        }
 
         usedWords.add(wordToGuess)
 
