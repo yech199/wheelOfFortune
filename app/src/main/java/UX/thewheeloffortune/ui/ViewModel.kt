@@ -30,16 +30,24 @@ class ViewModel : ViewModel() {
         _uiState.value = UiState(category = cat)
     }
 
+    /**
+     * Contains logic for spinning the wheel.
+     */
     fun spinWheel() {
         val point = points.random()
+
+        // Makes sure bankrupt does not happen twice in a row
         if (point == -1 && uiState.value.currentPointChance == -1)
             return spinWheel()
+
         _uiState.update { currentState ->
             currentState.copy(
                 isWheelSpun = true,
                 currentPointChance = point
             )
         }
+
+        // Bankrupt
         if (point == -1) {
             _uiState.update { currentState ->
                 currentState.copy(
@@ -49,6 +57,9 @@ class ViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Check if the guess of the player if correct and update values as needed
+     */
     fun checkGuess(guess: Char) {
         // Check if guess is part of wordToGuess -> Update hiddenWord
         var letterOccurrence = 0
@@ -70,14 +81,13 @@ class ViewModel : ViewModel() {
                     isWheelSpun = false,
                 )
             }
-
         }
 
         // Always update these when guessing
         _uiState.update { currentState ->
             currentState.copy(
                 score = uiState.value.score +
-                        (uiState.value.currentPointChance * letterOccurrence),
+                        (uiState.value.currentPointChance * updateHiddenWord(guess)),
                 isWheelSpun = false,
                 GameScreenLetters = hiddenWord.concatToString(),
                 gameButtons = disableClickedButton(guess)
@@ -94,7 +104,6 @@ class ViewModel : ViewModel() {
             }
         }
     }
-
 
 
     //---------------------------------------------------------------------
@@ -120,6 +129,10 @@ class ViewModel : ViewModel() {
     //---------------------------------------------------------------------
     // Private functions
     //---------------------------------------------------------------------
+
+    /**
+     * Get a random word from a category chosen by the player
+     */
     private fun getRandomWord(
         category: Categories
     ): String {
@@ -150,6 +163,10 @@ class ViewModel : ViewModel() {
         return wordToGuess.uppercase()
     }
 
+    /**
+     * Disables a button when clicked. This is used when the player
+     * tries to guess a letter
+     */
     private fun disableClickedButton(guess: Char): List<Pair<Char, Boolean>> {
         // Disable button
         val letterButtons: MutableList<Pair<Char, Boolean>> = ArrayList()
