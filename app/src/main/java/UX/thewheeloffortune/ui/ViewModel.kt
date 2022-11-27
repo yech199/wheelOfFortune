@@ -87,7 +87,7 @@ class ViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 score = uiState.value.score +
-                        (uiState.value.currentPointChance * updateHiddenWord(guess)),
+                        (uiState.value.currentPointChance * letterOccurrence),
                 isWheelSpun = false,
                 GameScreenLetters = hiddenWord.concatToString(),
                 gameButtons = disableClickedButton(guess)
