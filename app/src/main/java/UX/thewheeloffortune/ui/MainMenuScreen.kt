@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.sp
 fun MainMenuScreen(
     modifier: Modifier = Modifier,
     onPlayClicked: () -> Unit,
-    onHighScoresClicked: () -> Unit,
     onHelpClicked: () -> Unit
 ) {
     Column(
@@ -50,16 +49,6 @@ fun MainMenuScreen(
 
         Spacer(modifier = Modifier.height(50.dp))
         OutlinedButton(
-            onClick = onHighScoresClicked
-        ) {
-            Text(
-                text = stringResource(id = R.string.high_scores),
-                fontSize = 22.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.height(50.dp))
-        OutlinedButton(
             onClick = onHelpClicked
         ) {
             Text(
@@ -75,7 +64,6 @@ fun MainMenuScreen(
 fun MainMenuScreenPreview() {
     MainMenuScreen(
         onPlayClicked = { },
-        onHighScoresClicked = { },
         onHelpClicked = { }
     )
 }

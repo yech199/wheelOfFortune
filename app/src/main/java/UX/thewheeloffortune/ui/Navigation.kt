@@ -26,7 +26,6 @@ import androidx.navigation.compose.rememberNavController
 enum class Screen(@StringRes val title: Int) {
     MainMenu(title = R.string.main_menu),
     Category(title = R.string.categories),
-    HighScores(title = R.string.high_scores),
     Help(title = R.string.help),
     Game(title = R.string.app_name),
 }
@@ -62,7 +61,6 @@ fun MainScreen(
             composable(route = Screen.MainMenu.name) {
                 MainMenuScreen(
                     onPlayClicked = { navController.navigate(Screen.Category.name) },
-                    onHighScoresClicked = { navController.navigate(Screen.HighScores.name) },
                     onHelpClicked = { navController.navigate(Screen.Help.name) }
                 )
             }
@@ -75,11 +73,6 @@ fun MainScreen(
                     },
                     onChangeSelection = { viewModel.setCategory(Categories.getCategoryEnum(it)) }
                 )
-            }
-            composable(route = Screen.HighScores.name) {
-//                HighScoreScreen(
-//                    onButtonClicked = { navController.navigate(Screen.Game.name) }
-//                )
             }
             composable(route = Screen.Help.name) {
                 HelpScreen()
