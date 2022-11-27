@@ -95,21 +95,7 @@ class ViewModel : ViewModel() {
         }
     }
 
-    private fun disableClickedButton(guess: Char): List<Pair<Char, Boolean>> {
-        // Disable button
-        val letterButtons: MutableList<Pair<Char, Boolean>> = ArrayList()
-        uiState.value.gameButtons.forEach { button ->
-            val tmp: Pair<Char, Boolean>
-            if (button.first == guess) {
-                tmp = button.copy(second = false)
-                letterButtons.add(tmp)
-            } else {
-                tmp = button.copy()
-                letterButtons.add(tmp)
-            }
-        }
-        return letterButtons
-    }
+
 
     //---------------------------------------------------------------------
     // SETTERS
@@ -162,5 +148,21 @@ class ViewModel : ViewModel() {
             )
         }
         return wordToGuess.uppercase()
+    }
+
+    private fun disableClickedButton(guess: Char): List<Pair<Char, Boolean>> {
+        // Disable button
+        val letterButtons: MutableList<Pair<Char, Boolean>> = ArrayList()
+        uiState.value.gameButtons.forEach { button ->
+            val tmp: Pair<Char, Boolean>
+            if (button.first == guess) {
+                tmp = button.copy(second = false)
+                letterButtons.add(tmp)
+            } else {
+                tmp = button.copy()
+                letterButtons.add(tmp)
+            }
+        }
+        return letterButtons
     }
 }
