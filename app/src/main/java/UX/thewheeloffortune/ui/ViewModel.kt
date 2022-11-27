@@ -50,19 +50,6 @@ class ViewModel : ViewModel() {
     }
 
     fun checkGuess(guess: Char) {
-        // Disable button
-        val letterButtons: MutableList<Pair<Char, Boolean>> = ArrayList()
-        uiState.value.gameButtons.forEach { button ->
-            val tmp: Pair<Char, Boolean>
-            if (button.first == guess) {
-                tmp = button.copy(second = false)
-                letterButtons.add(tmp)
-            } else {
-                tmp = button.copy()
-                letterButtons.add(tmp)
-            }
-        }
-
         // Check if guess is part of wordToGuess -> Update hiddenWord
         var letterOccurrence = 0
         usedLetters.add(guess)
@@ -93,7 +80,7 @@ class ViewModel : ViewModel() {
                         (uiState.value.currentPointChance * letterOccurrence),
                 isWheelSpun = false,
                 GameScreenLetters = hiddenWord.concatToString(),
-                gameButtons = letterButtons
+                gameButtons = disableClickedButton(guess)
             )
         }
 
@@ -106,6 +93,22 @@ class ViewModel : ViewModel() {
                 )
             }
         }
+    }
+
+    private fun disableClickedButton(guess: Char): List<Pair<Char, Boolean>> {
+        // Disable button
+        val letterButtons: MutableList<Pair<Char, Boolean>> = ArrayList()
+        uiState.value.gameButtons.forEach { button ->
+            val tmp: Pair<Char, Boolean>
+            if (button.first == guess) {
+                tmp = button.copy(second = false)
+                letterButtons.add(tmp)
+            } else {
+                tmp = button.copy()
+                letterButtons.add(tmp)
+            }
+        }
+        return letterButtons
     }
 
     //---------------------------------------------------------------------
