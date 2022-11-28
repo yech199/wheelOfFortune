@@ -68,6 +68,7 @@ fun MainScreen(
                 CategoryScreen(
                     categories = categories,
                     onButtonClicked = {
+                        viewModel.resetGame()
                         viewModel.setWordToBeGuessed()
                         navController.navigate(Screen.Game.name)
                     },
@@ -91,11 +92,9 @@ fun MainScreen(
                     isGameEnded = uiState.isGameOver,
                     onPlayAgain = {
                         navController.popBackStack(Screen.Category.name, inclusive = false)
-                        viewModel.resetGame()
                     },
                     onExit = {
                         navController.popBackStack(Screen.MainMenu.name, inclusive = false)
-                        viewModel.resetGame()
                     }
                 
                 )
