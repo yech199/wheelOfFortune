@@ -31,7 +31,7 @@ fun MainMenuScreen(
     ) {
         Spacer(modifier = Modifier.height(50.dp))
         Image(
-            // source: https://www.flaticon.com/free-icon/wheel-of-fortune_2006249
+            // source, royalty free: https://www.flaticon.com/free-icon/wheel-of-fortune_2006249
             painter = painterResource(id = R.drawable.wheel),
             contentDescription = null
         )

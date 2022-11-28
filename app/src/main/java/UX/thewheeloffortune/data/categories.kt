@@ -338,6 +338,7 @@ val animals: Set<String> = setOf(
     "Dragonfly"
 )
 
+// source: https://grammar.yourdictionary.com/parts-of-speech/adjectives/list-of-adjective-words.html
 val adjectives: Set<String> = setOf(
     "red",
     "sweet",
