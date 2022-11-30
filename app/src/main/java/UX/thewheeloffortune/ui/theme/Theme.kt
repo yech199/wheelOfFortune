@@ -72,14 +72,14 @@ private val DarkColors = darkColorScheme(
 )
 
 
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+/* Other default colors to override
+background = Color.White,
+surface = Color.White,
+onPrimary = Color.White,
+onSecondary = Color.Black,
+onBackground = Color.Black,
+onSurface = Color.Black,
+*/
 
 @Composable
 fun TheWheelOfFortuneTheme(
@@ -94,8 +94,6 @@ fun TheWheelOfFortuneTheme(
 
     MaterialTheme(
         colorScheme = colors,
-//        typography = Typography,
-        shapes = Shapes,
         content = content
     )
 }
