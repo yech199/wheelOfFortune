@@ -16,6 +16,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+/**
+ * This is the Main Menu Screen. From here you can either tap help to see the rules or
+ * tap play to play the game
+ *
+ * FB! The source of the picture on the screen has been referenced on line 40
+ */
 @Composable
 fun MainMenuScreen(
     modifier: Modifier = Modifier,
