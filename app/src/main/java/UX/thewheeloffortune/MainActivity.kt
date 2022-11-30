@@ -1,6 +1,5 @@
 package UX.thewheeloffortune
 
-import UX.thewheeloffortune.ui.MainScreen
 import UX.thewheeloffortune.ui.theme.TheWheelOfFortuneTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity

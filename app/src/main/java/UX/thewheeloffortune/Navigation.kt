@@ -1,8 +1,8 @@
-package UX.thewheeloffortune.ui
+package UX.thewheeloffortune
 
-import UX.thewheeloffortune.R
 import UX.thewheeloffortune.data.Categories
 import UX.thewheeloffortune.data.Options.categories
+import UX.thewheeloffortune.ui.*
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
